@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS db_blogapp.users (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    fullname VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    bio TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS db_blogapp.blogs (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    user_id INT NOT NULL,
+    title VARCHAR(255),
+    content TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
