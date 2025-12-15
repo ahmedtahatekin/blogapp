@@ -4,7 +4,8 @@ class User {
     private $id;
     private $passwordHash;
     private $createdAt;
-    
+    private static PDO $conn;
+
     //public variables
     public $fullname;
     public $username;
@@ -23,15 +24,22 @@ class User {
         $this->bio = $bio;
     }
 
+    //modelin db kullanması için gerekli
+    //model dosyasından önce  db dahil edilir
+    //modelde dahil edildikten sonra ilk olarak bu fonksiyon çağırılır
+    public static function setConnection(PDO $conn): void {
+        self::$conn = $conn;
+    }
+
     private function setPassword($password) {
         $this->passwordHash = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function save() {
-        require_once '../blogapp/includes/db.php';
+        // require_once '../blogapp/includes/db.php';
 
         // verileri veritabanına kaydet
-        $stmt = $conn->prepare("INSERT INTO db_blogapp (fullname, username, password_hash, email, bio,) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (fullname, username, password_hash, email, bio) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([
             $this->fullname,
             $this->username,
@@ -44,10 +52,34 @@ class User {
         $this->id = $conn->lastInsertId();
     }
 
-    //? Log in
-    //in the future
-    
-    //? Log out
-    //in the future
+    public static function findByEmail(string $email): ?User {
+        // require_once '../blogapp/includes/db.php';
 
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt->execute([
+            'email' => $email
+        ]);
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //kullanıcı yoksa null döndür
+        if (!$data) {
+            return null;
+        }
+
+        //kullanıcı varsa yeni user objesi oluştur
+        $user = new User(
+            $data['fullname'],
+            $data['username'],
+            $data['email'],
+            null,
+            $data['bio']
+        );
+
+        $user->id = $data['id'];
+        $user->passwordHash = $data['password_hash'];
+
+        //yeni user objesini döndür
+        return $user;
+    }
 }
