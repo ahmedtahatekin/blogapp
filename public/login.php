@@ -1,3 +1,9 @@
+<?php
+//eğer form submit edildiyse login controllerini dahil et
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once __DIR__ . '/../Controllers/user_controller/login.php';
+}
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>

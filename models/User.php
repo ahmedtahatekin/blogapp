@@ -16,14 +16,13 @@ class User extends BaseModel {
     //? Registiration
 
     // constructor function
-    public function __construct($fullname, $username, $email, $password) {
+    public function __construct(string $fullname, string $username, string $email) {
         $this->fullname = $fullname;
         $this->username = $username;
-        $this->setPassword($password);
         $this->email = $email;
     }
 
-    private function setPassword($password) {
+    public function setPassword(string $password): void {
         $this->passwordHash = password_hash($password, PASSWORD_DEFAULT);
     }
 
@@ -47,6 +46,14 @@ class User extends BaseModel {
         $this->createdAt = $stmt->fetchColumn();
     }
 
+    public function getHashedPassword(): string {
+        return $this->passwordHash;
+    }
+
+    public function getId(): int {
+        return $this->id;
+    }
+
     public static function findByEmail(string $email): ?User {
         // require_once '../blogapp/includes/db.php';
 
@@ -67,8 +74,6 @@ class User extends BaseModel {
             $data['fullname'],
             $data['username'],
             $data['email'],
-            null,
-            $data['bio']
         );
 
         $user->id = $data['id'];

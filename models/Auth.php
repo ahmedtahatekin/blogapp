@@ -4,7 +4,7 @@ require_once "Session.php";
 require_once "User.php";
 class Auth {
     
-    public function attempt(string $email, string $password): bool {
+    public static function attempt(string $email, string $password): bool {
 
         //user nesnesini tanımla
         $user = User::findByEmail($email);
@@ -15,16 +15,20 @@ class Auth {
         }
 
         //şifre doğrulaması yap
-        if (!password_verify($password, $user->password)) {
+        if (!password_verify($password, $user->getHashedPassword())) {
             return false;
         }
 
         //buraya kadar geldiyse kullanıcı var ve şifre doğru demektir
         //kullanıcıyı sessiona ekle
         Session::start();
-        Session::set('user_id', $user->id);
+        Session::set('user_id', $user->getId());
         return true;
         
+    }
+
+    public static function isLoggedIn(): bool {
+        return isset($_SESSION['user_id']);
     }
 
 }
