@@ -16,19 +16,11 @@ class User extends BaseModel {
     //? Registiration
 
     // constructor function
-    public function __construct($fullname, $username, $email, $password, $bio = null) {
+    public function __construct($fullname, $username, $email, $password) {
         $this->fullname = $fullname;
         $this->username = $username;
         $this->setPassword($password);
         $this->email = $email;
-        $this->bio = $bio;
-    }
-
-    //modelin db kullanması için gerekli
-    //model dosyasından önce  db dahil edilir
-    //modelde dahil edildikten sonra ilk olarak bu fonksiyon çağırılır
-    public static function setConnection(PDO $conn): void {
-        self::$conn = $conn;
     }
 
     private function setPassword($password) {
@@ -38,23 +30,27 @@ class User extends BaseModel {
     public function save() {
 
         // verileri veritabanına kaydet
-        $stmt = $conn->prepare("INSERT INTO users (fullname, username, password_hash, email, bio) VALUES (?, ?, ?, ?, ?)");
+        $stmt = self::$conn->prepare("INSERT INTO users (fullname, username, password_hash, email) VALUES (?, ?, ?, ?)");
         $stmt->execute([
             $this->fullname,
             $this->username,
             $this->passwordHash,
             $this->email,
-            $this->bio
         ]);
 
         //id ve oluşturulma zamanını veritabanından çek
-        $this->id = $conn->lastInsertId();
+        $this->id = self::$conn->lastInsertId();
+        
+        $stmt = self::$conn->prepare("SELECT created_at FROM users WHERE id = ?");
+        $stmt->execute([$this->id]);
+
+        $this->createdAt = $stmt->fetchColumn();
     }
 
     public static function findByEmail(string $email): ?User {
         // require_once '../blogapp/includes/db.php';
 
-        $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt = self::$conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
         $stmt->execute([
             'email' => $email
         ]);

@@ -1,3 +1,8 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once __DIR__ . "/../Controllers/user_controller/register.php";
+}
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -13,6 +18,10 @@
 <div class="container mt-5">
     <h2>Kaydol</h2>
     <form method="POST" action="">
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Tam Adınız</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" required>
+        </div>
         <div class="mb-3">
             <label for="username" class="form-label">Kullanıcı Adı</label>
             <input type="text" class="form-control" id="username" name="username" required>
