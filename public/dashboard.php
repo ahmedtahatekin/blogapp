@@ -31,7 +31,7 @@
                     <td>2025-11-25</td>
                     <td>
                         <a href="blog_edit.php" class="btn btn-sm btn-warning">Düzenle</a>
-                        <form method="POST" action="/controller/blog_delete.php" class="d-inline">
+                        <form method="POST" action="/Controllers/blog_controller/blog_delete.php" class="d-inline">
                             <button type="submit" class="btn btn-sm btn-danger">Sil</button>
                         </form>
                     </td>
@@ -41,7 +41,8 @@
                     <td>2025-11-20</td>
                     <td>
                         <a href="blog_edit.php" class="btn btn-sm btn-warning">Düzenle</a>
-                        <form method="POST" action="/controller/blog_delete.php" class="d-inline">
+                        <form method="POST" action="/Controllers/blog_controller/blog_delete.php" class="d-inline">
+                            <input type="hidden" name="BlogId" value="" >
                             <button type="submit" class="btn btn-sm btn-danger">Sil</button>
                         </form>
                     </td>

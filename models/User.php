@@ -1,10 +1,10 @@
 <?php
-class User {
+require_once __DIR__ . "/BaseModel.php";
+class User extends BaseModel {
     //private variables
     private $id;
     private $passwordHash;
     private $createdAt;
-    private static PDO $conn;
 
     //public variables
     public $fullname;
