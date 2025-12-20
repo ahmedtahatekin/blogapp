@@ -1,5 +1,6 @@
 <?php
-class Blog {
+require_once __DIR__ . "/BaseModel.php";
+class Blog extends BaseModel {
     //private variables
     private int $id;
     private $created_at;
@@ -71,5 +72,7 @@ class Blog {
     }
 
     function deleteSelectedBlog(int $id): void {
+        //veri tabanından seçilen blog ögesini sil
+        $stmt = $conn->prepare("DELETE FROM blogs WHERE id = $id");
     }
 }

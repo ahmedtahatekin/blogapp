@@ -36,7 +36,6 @@ class User {
     }
 
     public function save() {
-        // require_once '../blogapp/includes/db.php';
 
         // verileri veritabanına kaydet
         $stmt = $conn->prepare("INSERT INTO users (fullname, username, password_hash, email, bio) VALUES (?, ?, ?, ?, ?)");
