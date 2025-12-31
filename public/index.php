@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../models/Session.php';
+Session::start();
+?>
 <!DOCTYPE html>
 <html lang="tr">
 
