@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../../models/Auth.php';
-require_once __DIR__ . '/../../models/Session.php';
+require_once __DIR__ . '/../../includes/bootstrap.php';
 Session::start();
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

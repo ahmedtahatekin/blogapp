@@ -3,8 +3,7 @@
 // models/Blog.php modelini dahil eder
 // public/dashboard.php tarafından kullanılacak
 
-require_once __DIR__ . "/../../includes/db.php";
-require_once __DIR__ . "/../../models/Blog.php";
+require_once __DIR__ . '/../../includes/bootstrap.php';
 
 Blog::setConnection($conn);
 

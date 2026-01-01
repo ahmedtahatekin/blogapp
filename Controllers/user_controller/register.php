@@ -2,10 +2,7 @@
 // yeni kullanıcı kaydı yapar
 // models/User.php modelini dahil eder
 // public/register.php kullanır
-
-require_once __DIR__ . "/../../includes/db.php";
-require_once __DIR__ . "/../../models/User.php";
-//veri tabanı referansı oluştur
+require_once __DIR__ . '/../../includes/bootstrap.php';
 User::setConnection($conn);
 
 //kullanıcının girdiği form verilerini al

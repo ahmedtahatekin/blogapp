@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/Session.php';
+require_once __DIR__ . '/../includes/bootstrap.php';
 Session::start();
 ?>
 <!DOCTYPE html>

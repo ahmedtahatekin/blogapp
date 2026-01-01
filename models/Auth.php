@@ -1,7 +1,5 @@
 <?php
-
-require_once "Session.php";
-require_once "User.php";
+require_once __DIR__ . '/../includes/bootstrap.php';
 class Auth {
     
     public static function attempt(string $email, string $password): bool {
