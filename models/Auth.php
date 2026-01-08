@@ -31,7 +31,7 @@ class Auth {
         return isset($_SESSION['user_id']);
     }
 
-    public function logout(): void {
+    public static function logout(): void {
 
         $_SESSION = [];
 
