@@ -15,7 +15,12 @@ Session::start();
                     <li class="nav-item"><a class="nav-link" href="register.php">Kaydol</a></li>
                 <?php elseif ($_SERVER['SCRIPT_NAME'] === '/dashboard.php'): ?>
                     <li class="nav-item"><a class="nav-link" href="new_blog.php">Yeni Blog Yazısı</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.php">Çıkış Yap</a></li>
+
+                    <li class="nav-item">
+                        <form action="logout.php" method="post">
+                            <input type="submit" class="nav-link" name="logout">Çıkış Yap</input>
+                        </form>
+                    </li>
                 <?php elseif (($_SERVER['SCRIPT_NAME'] === '/index.php') && (Auth::isLoggedIn())): ?>
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Blog Yazılarım</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" href="new_blog.php">Yeni Blog Yazısı</a></li> -->
