@@ -12,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     Auth::attempt($email, $password);
 
     if (Auth::isLoggedIn()) {
-        header('location: /');
+        header('location: index.php');
+        exit;
     }
     
 }
