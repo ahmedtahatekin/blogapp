@@ -24,7 +24,14 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+//her formda veriyi temizlemek üzere
+function clearInput(mixed $value): mixed {
+    $value = trim($value);
+    $value = htmlspecialchars($value);
+    $value = stripslashes($value);
 
+    return $value;
+}
 
 spl_autoload_register(function ($className) {
     $path = __DIR__ . "/../models/" . $className . ".php";

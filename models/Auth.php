@@ -4,6 +4,9 @@ class Auth {
 
     public static function attempt(string $email, string $password): bool {
 
+        $email = clearInput($email);
+        $password = clearInput($password);
+
         //user nesnesini tanımla
         $user = User::findByEmail($email);
 
