@@ -24,6 +24,7 @@ class Auth {
         //kullanıcıyı sessiona ekle
         Session::start();
         Session::set('user_id', $user->getId());
+        Session::set('user_email', $user->email);
         return true;
     }
 

@@ -65,7 +65,7 @@
 
             <!-- Geri Dön -->
             <div class="mt-4">
-                <a href="/" class="btn btn-outline-secondary">← Keşfete Dön</a>
+                <a href="index.php" class="btn btn-outline-secondary">← Keşfete Dön</a>
             </div>
 
         </div>
