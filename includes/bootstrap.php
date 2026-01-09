@@ -33,11 +33,18 @@ function clearInput(mixed $value): mixed {
     return $value;
 }
 
+//uyarılar için
+function alert(string $alert_type, string $alert_content): string {
+    return "<div class='alert alert-$alert_type' role='alert' >"
+        . $alert_content
+        . "</div>";
+}
+
+require_once __DIR__ . "/db.php";
+
 spl_autoload_register(function ($className) {
     $path = __DIR__ . "/../models/" . $className . ".php";
     if (file_exists($path)) {
         require_once $path;
     }
 });
-
-require_once __DIR__ . "/db.php";

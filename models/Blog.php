@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/BaseModel.php";
+require_once __DIR__ . "/../includes/bootstrap.php";
 class Blog extends BaseModel {
     //private variables
     private int $id;
@@ -17,22 +18,20 @@ class Blog extends BaseModel {
 
     public static function createNewBlog(int $user_id, string $title, string $content): void {
         //veritabanına parametrelerle blogu kaydet
-        $stmt = $conn->prepare("INSERT INTO blogs (user_id, title, content) VALUES (?, ?, ?)");
+        $stmt = self::$conn->prepare("INSERT INTO blogs (user_id, title, content) VALUES (?, ?, ?)");
         $stmt->execute([
             $user_id,
             $title,
             $content
         ]);
 
-        $stmt = $conn->prepare("SELECT title FROM blogs WHERE title = $title");
-        $stmt->execute();
-
-        echo "Yeni Blog Başarıyla oluşturuldu!: $stmt";
+        $stmt = self::$conn->prepare("SELECT title FROM blogs WHERE title = ?");
+        $stmt->execute([$title]);
     }
 
     public static function findBlogById(int $id): ?Blog {
         //veritabanından blogu çek
-        $stmt = $conn->prepare("SELECT * FROM blogs WHERE id = :id");
+        $stmt = self::$conn->prepare("SELECT * FROM blogs WHERE id = :id");
         $stmt->execute([
             "id" => $id
         ]);
@@ -60,19 +59,19 @@ class Blog extends BaseModel {
         //başlık veya içerik girilmediyse bunları güncelleme
         if ($title === "") {
             //veri tabanındaki blog ögesini bul
-            $stmt = $conn->prepare("UPDATE blogs SET content = $content WHERE id = $id");
+            $stmt = self::$conn->prepare("UPDATE blogs SET content = $content WHERE id = $id");
         } elseif ($content === "") {
             //veri tabanındaki blog ögesini bul
-            $stmt = $conn->prepare("UPDATE blogs SET title = $title WHERE id = $id");
+            $stmt = self::$conn->prepare("UPDATE blogs SET title = $title WHERE id = $id");
         } elseif (!$title === "" && !$content === "") {
             //veri tabanındaki blog ögesini bul
-            $stmt = $conn->prepare("UPDATE blogs SET title = $title, content = $content WHERE id = $id");
+            $stmt = self::$conn->prepare("UPDATE blogs SET title = $title, content = $content WHERE id = $id");
         }
         $stmt->execute();
     }
 
     function deleteSelectedBlog(int $id): void {
         //veri tabanından seçilen blog ögesini sil
-        $stmt = $conn->prepare("DELETE FROM blogs WHERE id = $id");
+        $stmt = self::$conn->prepare("DELETE FROM blogs WHERE id = $id");
     }
 }
