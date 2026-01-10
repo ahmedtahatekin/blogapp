@@ -82,4 +82,33 @@ class User extends BaseModel {
         //yeni user objesini döndür
         return $user;
     }
+    
+    public static function findbyId(int $id): ?User {
+        // require_once '../blogapp/includes/db.php';
+
+        $stmt = self::$conn->prepare("SELECT * FROM users WHERE id = :id LIMIT 1");
+        $stmt->execute([
+            'id' => $id
+        ]);
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //kullanıcı yoksa null döndür
+        if (!$data) {
+            return null;
+        }
+
+        //kullanıcı varsa yeni user objesi oluştur
+        $user = new User(
+            $data['fullname'],
+            $data['username'],
+            $data['email'],
+        );
+
+        $user->id = $data['id'];
+        $user->passwordHash = $data['password_hash'];
+
+        //yeni user objesini döndür
+        return $user;
+    }
 }

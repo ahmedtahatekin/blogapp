@@ -14,11 +14,12 @@ require_once __DIR__ . '/../Controllers/blog_controller/discover.php';
         require_once '../includes/title.php' ?>
     </title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    
+
     <?php require_once 'partials/_navbar.php' ?>
 
     <div class="container mt-4">
@@ -31,18 +32,16 @@ require_once __DIR__ . '/../Controllers/blog_controller/discover.php';
 
         <div class="row">
             <!-- Örnek blog kartları -->
-             <?php foreach ($blogs as $blog): ?>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $blog['title']; ?></h5>
-                        <p class="card-text"><?= clearInput(mb_substr($blog['content'], 0, 20, 'UTF-8')) . "..."; ?></p>
-                        <form action="blog.php" method="get">
-                            <button class="btn btn-primary" type="submit" data-id="<?php $blog['id']; ?>" name="b">Devamını Oku</button>
-                        </form>
+            <?php foreach ($blogs as $blog): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $blog['title']; ?></h5>
+                            <p class="card-text"><?= clearInput(mb_substr($blog['content'], 0, 20, 'UTF-8')) . "..."; ?></p>
+                            <a href="blog.php?b=<?= $blog['id']; ?>" class="btn btn-primary">Devamını Oku</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </div>
