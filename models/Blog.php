@@ -82,4 +82,12 @@ class Blog extends BaseModel {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getUserId(): int {
+        return $this->user_id;
+    }
+
+    public function getCreatedAt(): int {
+        return $this->created_at;
+    }
 }

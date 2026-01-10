@@ -1,9 +1,8 @@
 <?php
 require_once __DIR__ . "/../Controllers/blog_controller/view_blog.php";
-// $user_id = $blog['user_id'];
-// $user = User::findbyId($user_id);
-// echo $user->username;
-// echo $blog['title'];
+global $blog;
+$blog_author = User::findbyId($blog->getUserId());
+$blog_authors_name = $blog_author->fullname;
 ?>
 <!doctype html>
 <html lang="tr">
@@ -21,29 +20,18 @@ require_once __DIR__ . "/../Controllers/blog_controller/view_blog.php";
         <div class="col-lg-8 mx-auto">
 
             <!-- Blog Başlığı -->
-            <h1 class="fw-bold mb-3">Blog Başlığı Buraya Gelecek</h1>
+            <h1 class="fw-bold mb-3"><?= mb_convert_case($blog->title, MB_CASE_TITLE, "UTF-8"); ?></h1>
 
             <!-- Yazar ve Tarih -->
             <div class="text-muted mb-4">
-                <span>Yazar: <strong>John Doe</strong></span> •
-                <span>15 Kasım 2025</span>
+                <span>Yazar: <strong><?= $blog_authors_name; ?></strong></span> •
+                <!-- <span><?= $blog->getCreatedAt(); ?></span> -->
             </div>
 
             <!-- Blog İçeriği -->
             <article class="bg-white p-4 rounded shadow-sm">
                 <p>
-                    Bu alanda blog yazısının içeriği gösterilecek. Backend tarafı
-                    henüz eklenmediği için placeholder içerik bulunuyor. Blog metni
-                    buraya PHP ile veritabanından çekilerek yerleştirilecektir.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed dignissim, nisl id lacinia hendrerit, nunc urna commodo justo,
-                    in volutpat lectus libero nec ligula.
-                </p>
-                <p>
-                    Curabitur ac ligula quis arcu posuere consequat. Etiam interdum
-                    posuere massa, vitae pharetra odio convallis sed.
+                    <?= $blog->content; ?>
                 </p>
             </article>
 
