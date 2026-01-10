@@ -70,8 +70,16 @@ class Blog extends BaseModel {
         $stmt->execute();
     }
 
-    function deleteSelectedBlog(int $id): void {
+    public static function deleteSelectedBlog(int $id): void {
         //veri tabanından seçilen blog ögesini sil
         $stmt = self::$conn->prepare("DELETE FROM blogs WHERE id = $id");
+    }
+
+    public static function getAllBlogs(int $limit = 10): array {
+        $stmt = self::$conn->prepare("SELECT * FROM blogs ORDER BY created_at DESC LIMIT ?");
+        $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
 Session::start();
+require_once __DIR__ . '/../Controllers/blog_controller/discover.php';
 ?>
 <!DOCTYPE html>
 <html lang="tr">
@@ -23,33 +24,26 @@ Session::start();
     <div class="container mt-4">
         <h1 class="mb-4">Keşfet</h1>
 
-        <form class="d-flex mb-4" method="GET" action="">
+        <form class="d-flex mb-4" method="GET" action="search.php">
             <input class="form-control me-2" type="search" placeholder="Blog ara..." name="q">
             <button class="btn btn-outline-success" type="submit">Ara</button>
         </form>
 
         <div class="row">
             <!-- Örnek blog kartları -->
+             <?php foreach ($blogs as $blog): ?>
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Blog Başlığı 1</h5>
-                        <p class="card-text">Bu bir örnek blog özetidir...</p>
+                        <h5 class="card-title"><?= $blog['title']; ?></h5>
+                        <p class="card-text"><?= clearInput(mb_substr($blog['content'], 0, 20, 'UTF-8')) . "..."; ?></p>
                         <form action="blog.php" method="get">
-                            <button class="btn btn-primary" type="submit" data-id="" name="b">Devamını Oku</button>
+                            <button class="btn btn-primary" type="submit" data-id="<?php $blog['id']; ?>" name="b">Devamını Oku</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Blog Başlığı 2</h5>
-                        <p class="card-text">Bu bir örnek blog özetidir...</p>
-                        <a href="#" class="btn btn-primary">Devamını oku</a>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
