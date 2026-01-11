@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../includes/bootstrap.php';
+global $conn;
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -9,6 +10,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
 $is_logged_in = Auth::isLoggedIn();
 
 $user_email = $_SESSION['user_email'] ?? '';
+User::setConnection($conn);
 $user = User::findByEmail($user_email);
 
 ?>
