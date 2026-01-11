@@ -36,7 +36,7 @@ require_once __DIR__ . '/../Controllers/blog_controller/discover.php';
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $blog['title']; ?></h5>
+                            <h5 class="card-title"><?= mb_convert_case($blog['title'], MB_CASE_TITLE, "UTF-8"); ?></h5>
                             <p class="card-text"><?= clearInput(mb_substr($blog['content'], 0, 20, 'UTF-8')) . "..."; ?></p>
                             <a href="blog.php?b=<?= $blog['id']; ?>" class="btn btn-primary">Devamını Oku</a>
                         </div>

@@ -51,6 +51,8 @@ class Blog extends BaseModel {
             $data['content']
         );
 
+        $blog->created_at = $data['created_at'];
+
         //oluşturulan blog nesnesini döndür
         return $blog;
     }
@@ -87,7 +89,7 @@ class Blog extends BaseModel {
         return $this->user_id;
     }
 
-    public function getCreatedAt(): int {
+    public function getCreatedAt(): ?string {
         return $this->created_at;
     }
 }

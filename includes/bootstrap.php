@@ -40,6 +40,56 @@ function alert(string $alert_type, string $alert_content): string {
         . "</div>";
 }
 
+//zamanları daha temiz göstermek üzere
+function clearTime(string $date): string {
+    $result = explode("-",$date);
+
+    switch ($result[1]) {
+        case '01':
+            $result[1] = "Ocak";
+            break;
+        case '02':
+            $result[1] = "Şubat";
+            break;
+        case '03':
+            $result[1] = "Mart";
+            break;
+        case '04':
+            $result[1] = "Nisan";
+            break;
+        case '05':
+            $result[1] = "Mayıs";
+            break;
+        case '06':
+            $result[1] = "Haziran";
+            break;
+        case '07':
+            $result[1] = "Temmuz";
+            break;
+        case '08':
+            $result[1] = "Ağustos";
+            break;
+        case '09':
+            $result[1] = "Eylül";
+            break;
+        case '10':
+            $result[1] = "Ekim";
+            break;
+        case '11':
+            $result[1] = "Kasım";
+            break;
+        case '12':
+            $result[1] = "Aralık";
+            break;
+    }
+
+    $result[2] = substr($result[2], 0, 2);
+
+    $result = $result[2] . " " . $result[1] . " " . $result[0];
+
+    return $result;
+}
+
 require_once __DIR__ . "/db.php";
 
 spl_autoload_register(function ($className) {
