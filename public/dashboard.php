@@ -33,6 +33,7 @@ require_once __DIR__ . "/../Controllers/blog_controller/dashboard.php";
                         <td><?= clearTime($blog['created_at']); ?></td>
                         <td>
                             <a href="blog_edit.php" class="btn btn-sm btn-warning">Düzenle</a>
+                            <a href="blog.php?b=<?= $blog['id']; ?>" class="btn btn-sm btn-primary">Görüntüle</a>
                             <form method="POST" action="/Controllers/blog_controller/blog_delete.php" class="d-inline">
                                 <button type="submit" class="btn btn-sm btn-danger">Sil</button>
                             </form>
