@@ -75,13 +75,36 @@ class Blog extends BaseModel {
     public static function deleteSelectedBlog(int $id): void {
         //veri tabanından seçilen blog ögesini sil
         $stmt = self::$conn->prepare("DELETE FROM blogs WHERE id = $id");
+        // to be contiuned...
     }
 
-    public static function getAllBlogs(int $limit = 10): array {
-        $stmt = self::$conn->prepare("SELECT * FROM blogs ORDER BY created_at DESC LIMIT ?");
-        $stmt->bindValue(1, $limit, PDO::PARAM_INT);
-        $stmt->execute();
+    public static function getAllBlogs(int $limit = 0, string $user_id = ""): array {
 
+        $sql = "SELECT * FROM blogs";
+        $params = [];
+
+        if ($user_id !== "") {
+            $sql .= " WHERE user_id = ?";
+            $params[] = $user_id;
+        }
+
+        $sql .= " ORDER BY created_at DESC";
+
+        if ($limit > 0) {
+            $sql .= " LIMIT ?";
+            $params[] = $limit;
+        }
+
+        $stmt = self::$conn->prepare($sql);
+
+        foreach ($params as $index => $value) {
+            $paramIndex = $index + 1;
+
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($paramIndex, $value, $type);
+        }
+
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

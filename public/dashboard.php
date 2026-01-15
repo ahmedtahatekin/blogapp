@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . "/../includes/bootstrap.php";
+require_once __DIR__ . "/../Controllers/blog_controller/dashboard.php";
+?>
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -23,27 +27,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Blog Başlığı 1</td>
-                    <td>2025-11-25</td>
-                    <td>
-                        <a href="blog_edit.php" class="btn btn-sm btn-warning">Düzenle</a>
-                        <form method="POST" action="/Controllers/blog_controller/blog_delete.php" class="d-inline">
-                            <button type="submit" class="btn btn-sm btn-danger">Sil</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Blog Başlığı 2</td>
-                    <td>2025-11-20</td>
-                    <td>
-                        <a href="blog_edit.php" class="btn btn-sm btn-warning">Düzenle</a>
-                        <form method="POST" action="/Controllers/blog_controller/blog_delete.php" class="d-inline">
-                            <input type="hidden" name="BlogId" value="" >
-                            <button type="submit" class="btn btn-sm btn-danger">Sil</button>
-                        </form>
-                    </td>
-                </tr>
+                <?php foreach ($blogs as $blog): ?>
+                    <tr>
+                        <td><?= mb_convert_case($blog['title'], MB_CASE_TITLE, "UTF-8"); ?></td>
+                        <td><?= clearTime($blog['created_at']); ?></td>
+                        <td>
+                            <a href="blog_edit.php" class="btn btn-sm btn-warning">Düzenle</a>
+                            <form method="POST" action="/Controllers/blog_controller/blog_delete.php" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
