@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <button type="submit" class="btn btn-primary">Giriş Yap</button>
         <a href="register.php" class="btn btn-link">Kaydol</a>
+        <a href="index.php" class="btn btn-link">Misafir Olarak Devam Et</a>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

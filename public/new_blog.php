@@ -1,4 +1,11 @@
 <?php
+require_once __DIR__ .  '/../includes/bootstrap.php';
+
+if (!Auth::isLoggedIn()) {
+    header('location: login.php');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     require_once __DIR__ . "/../Controllers/blog_controller/new_blog.php";
