@@ -1,10 +1,8 @@
 <?php
-// seçilen blogun silinmesini sağlar
-// models/Blog.php modelini dahil eder
-// public/dashboard.php tarafından kullanılacak
-
 require_once __DIR__ . '/../../includes/bootstrap.php';
+global $conn;
 
-Blog::setConnection($conn);
+$delete_blog_id = $_POST['delete-blog-id'];
 
-$id = $_POST[''];
+$stmt = $conn->prepare("DELETE FROM blogs WHERE id = ?");
+$stmt->execute([$delete_blog_id]);
