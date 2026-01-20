@@ -26,7 +26,6 @@ require_once __DIR__ . '/../Controllers/blog_controller/discover.php';
         </form>
 
         <div class="row">
-            <!-- Örnek blog kartları -->
             <?php foreach ($blogs as $blog): ?>
                 <div class="col-md-4 mb-4">
                     <div class="card">
