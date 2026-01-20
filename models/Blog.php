@@ -57,16 +57,13 @@ class Blog extends BaseModel {
         return $blog;
     }
 
-    public function editSelectedBlog(int $id, string $title = "", string $content = ""): void {
+    public static function editSelectedBlog(int $id, string $title = "", string $content = ""): void {
         //başlık veya içerik girilmediyse bunları güncelleme
         if ($title === "") {
-            //veri tabanındaki blog ögesini bul
             $stmt = self::$conn->prepare("UPDATE blogs SET content = $content WHERE id = $id");
         } elseif ($content === "") {
-            //veri tabanındaki blog ögesini bul
             $stmt = self::$conn->prepare("UPDATE blogs SET title = $title WHERE id = $id");
         } elseif (!$title === "" && !$content === "") {
-            //veri tabanındaki blog ögesini bul
             $stmt = self::$conn->prepare("UPDATE blogs SET title = $title, content = $content WHERE id = $id");
         }
         $stmt->execute();
