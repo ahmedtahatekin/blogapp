@@ -40,7 +40,15 @@ function alert(string $alert_type, string $alert_content): string {
         . "</div>";
 }
 
-//zamanları daha temiz göstermek üzere
+/**
+* Takes the unreadable date
+* and make it readeable as turkish
+* like 24 Mayıs 2025
+* 
+* @param string $date SQL default timestamp format (like 2-05-2025)
+* 
+* @return string The readable date format as turkish 
+*/
 function clearTime(string $date): string {
     $result = explode("-",$date);
 
